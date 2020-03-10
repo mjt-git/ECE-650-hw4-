@@ -136,4 +136,19 @@ void query4(connection *C, string team_state, string team_color)
 
 void query5(connection *C, int num_wins)
 {
+	string cmd = "SELECT \"FIRST_NAME\", \"LAST_NAME\", \"TEAM\".\"NAME\", \"TEAM\".\"WINS\" FROM \"PLAYER\", \"TEAM\" WHERE \"PLAYER\".\"TEAM_ID\"=\"TEAM\".\"TEAM_ID\" AND \"TEAM\".\"WINS\" > " + to_string(num_wins) + ";";
+	pqxx::work w(*C);
+	pqxx::result r = w.exec(cmd.c_str());
+	w.commit();
+	cout << "FIRST_NAME LAST_NAME NAME WINS" << endl;
+	for(int i = 0; i < r.size(); i++) {
+		cout << r[i][0] << " " << r[i][1] << " " << r[i][2] << " " << r[i][3] << endl;
+	}
 }
+
+
+
+
+
+
+

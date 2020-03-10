@@ -16,5 +16,5 @@ void exercise(connection *C)
 
 	query4(C, "NC", "DarkBlue");
 
-	
+	query5(C, 10);
 }
