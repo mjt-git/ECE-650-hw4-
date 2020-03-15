@@ -48,20 +48,22 @@ void createAllTables(pqxx::connection * c) {
     "\"UNIFORM_NUM\" INT NOT NULL, \"FIRST_NAME\" VARCHAR(50) NOT NULL, \"LAST_NAME\" VARCHAR(50) NOT NULL, " +
     "\"MPG\" INT NOT NULL, \"PPG\" INT NOT NULL, \"RPG\" INT NOT NULL, " +
     "\"APG\" INT NOT NULL, \"SPG\" DECIMAL(10,1) NOT NULL, \"BPG\" DECIMAL(10,1) NOT NULL, " +
-    "PRIMARY KEY (\"PLAYER_ID\"));";
-  createCmds.push_back(cmdPly);
+    "PRIMARY KEY (\"PLAYER_ID\"), FOREIGN KEY (\"TEAM_ID\") REFERENCES \"TEAM\"(\"TEAM_ID\") ON UPDATE CASCADE);";
 
   string cmdTeam = string("CREATE TABLE \"TEAM\"(\"TEAM_ID\" INT NOT NULL, \"NAME\" VARCHAR(50) NOT NULL, ") +
                     "\"STATE_ID\" INT NOT NULL, \"COLOR_ID\" INT NOT NULL, \"WINS\" INT NOT NULL, \"LOSSES\" " +
-                    "INT NOT NULL, PRIMARY KEY (\"TEAM_ID\"));";
-  createCmds.push_back(cmdTeam);
+                    "INT NOT NULL, PRIMARY KEY (\"TEAM_ID\"), FOREIGN KEY (\"STATE_ID\") REFERENCES \"STATE\"(\"STATE_ID\") ON UPDATE CASCADE, FOREIGN KEY (\"COLOR_ID\") REFERENCES \"COLOR\"(\"COLOR_ID\") ON UPDATE CASCADE);";
+
 
   string cmdState = "CREATE TABLE \"STATE\"(\"STATE_ID\" INT NOT NULL, \"NAME\" VARCHAR(50) NOT NULL, PRIMARY KEY (\"STATE_ID\"));";
-  createCmds.push_back(cmdState);
+
 
   string cmdColor = "CREATE TABLE \"COLOR\"(\"COLOR_ID\" INT NOT NULL, \"NAME\" VARCHAR(50) NOT NULL, PRIMARY KEY (\"COLOR_ID\"));";
-  createCmds.push_back(cmdColor);
 
+  createCmds.push_back(cmdColor);
+  createCmds.push_back(cmdState);
+  createCmds.push_back(cmdTeam);
+  createCmds.push_back(cmdPly);
   for(string cmd : createCmds) {
     createTable(c, cmd);
   }
@@ -136,10 +138,11 @@ void insertColorTable(pqxx::connection * c) {
 }
 
 void insertAllTables(pqxx::connection * c) {
-  insertPlayerTable(c);
-  insertTeamTable(c);
-  insertStateTable(c);
   insertColorTable(c);
+  insertStateTable(c);
+  insertTeamTable(c);
+  insertPlayerTable(c);
+
 }
 
 
