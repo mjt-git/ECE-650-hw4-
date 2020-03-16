@@ -17,4 +17,6 @@ void exercise(connection *C)
 	query4(C, "NC", "DarkBlue");
 
 	query5(C, 10);
+
+	add_player(C, 1, 330, "mjt", "jtm", 0,0,0,0,0.0,0.0);
 }

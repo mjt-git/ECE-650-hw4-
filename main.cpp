@@ -44,21 +44,21 @@ void createTable(pqxx::connection * c, string cmd) {
 void createAllTables(pqxx::connection * c) {
   vector<string> createCmds;
 
-  string cmdPly = string("CREATE TABLE \"PLAYER\"(\"PLAYER_ID\" INT NOT NULL, \"TEAM_ID\" INT NOT NULL, ") +
+  string cmdPly = string("CREATE TABLE \"PLAYER\"(\"PLAYER_ID\" SERIAL NOT NULL, \"TEAM_ID\" INT NOT NULL, ") +
     "\"UNIFORM_NUM\" INT NOT NULL, \"FIRST_NAME\" VARCHAR(50) NOT NULL, \"LAST_NAME\" VARCHAR(50) NOT NULL, " +
     "\"MPG\" INT NOT NULL, \"PPG\" INT NOT NULL, \"RPG\" INT NOT NULL, " +
     "\"APG\" INT NOT NULL, \"SPG\" DECIMAL(10,1) NOT NULL, \"BPG\" DECIMAL(10,1) NOT NULL, " +
     "PRIMARY KEY (\"PLAYER_ID\"), FOREIGN KEY (\"TEAM_ID\") REFERENCES \"TEAM\"(\"TEAM_ID\") ON UPDATE CASCADE);";
 
-  string cmdTeam = string("CREATE TABLE \"TEAM\"(\"TEAM_ID\" INT NOT NULL, \"NAME\" VARCHAR(50) NOT NULL, ") +
+  string cmdTeam = string("CREATE TABLE \"TEAM\"(\"TEAM_ID\" SERIAL NOT NULL, \"NAME\" VARCHAR(50) NOT NULL, ") +
                     "\"STATE_ID\" INT NOT NULL, \"COLOR_ID\" INT NOT NULL, \"WINS\" INT NOT NULL, \"LOSSES\" " +
                     "INT NOT NULL, PRIMARY KEY (\"TEAM_ID\"), FOREIGN KEY (\"STATE_ID\") REFERENCES \"STATE\"(\"STATE_ID\") ON UPDATE CASCADE, FOREIGN KEY (\"COLOR_ID\") REFERENCES \"COLOR\"(\"COLOR_ID\") ON UPDATE CASCADE);";
 
 
-  string cmdState = "CREATE TABLE \"STATE\"(\"STATE_ID\" INT NOT NULL, \"NAME\" VARCHAR(50) NOT NULL, PRIMARY KEY (\"STATE_ID\"));";
+  string cmdState = "CREATE TABLE \"STATE\"(\"STATE_ID\" SERIAL NOT NULL, \"NAME\" VARCHAR(50) NOT NULL, PRIMARY KEY (\"STATE_ID\"));";
 
 
-  string cmdColor = "CREATE TABLE \"COLOR\"(\"COLOR_ID\" INT NOT NULL, \"NAME\" VARCHAR(50) NOT NULL, PRIMARY KEY (\"COLOR_ID\"));";
+  string cmdColor = "CREATE TABLE \"COLOR\"(\"COLOR_ID\" SERIAL NOT NULL, \"NAME\" VARCHAR(50) NOT NULL, PRIMARY KEY (\"COLOR_ID\"));";
 
   createCmds.push_back(cmdColor);
   createCmds.push_back(cmdState);

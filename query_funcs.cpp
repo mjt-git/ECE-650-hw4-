@@ -11,10 +11,10 @@ int countNum(connection *C, string tableName) {
 void add_player(connection *C, int team_id, int jersey_num, string first_name, string last_name,
                 int mpg, int ppg, int rpg, int apg, double spg, double bpg)
 {
-	int playerID = countNum(C, "PLAYER") + 1;
+  //	int playerID = countNum(C, "PLAYER") + 1;
 	pqxx::work w(*C);
 	// where is player id ?
-	pqxx::result r = w.exec("INSERT INTO \"PLAYER\" VALUES(" + to_string(playerID) + ","
+	pqxx::result r = w.exec("INSERT INTO \"PLAYER\" (\"TEAM_ID\", \"UNIFORM_NUM\", \"FIRST_NAME\", \"LAST_NAME\", \"MPG\", \"PPG\", \"RPG\", \"APG\", \"SPG\", \"BPG\") VALUES("
 	                        + to_string(team_id) + ","
 	                        + to_string(jersey_num) + ",'" + first_name + "','" + last_name + "',"
 	                        + to_string(mpg) + "," + to_string(ppg) + "," + to_string(rpg) + ","
@@ -25,10 +25,10 @@ void add_player(connection *C, int team_id, int jersey_num, string first_name, s
 
 void add_team(connection *C, string name, int state_id, int color_id, int wins, int losses)
 {
-	int teamID = countNum(C, "TEAM") + 1;
+  //	int teamID = countNum(C, "TEAM") + 1;
 	pqxx::work w(*C);
-	pqxx::result r = w.exec("INSERT INTO \"TEAM\" VALUES(" + to_string(teamID)
-	                        + ",'" + name + "'," + to_string(state_id) + "," + to_string(color_id) + ","
+	pqxx::result r = w.exec("INSERT INTO \"TEAM\" (\"NAME\", \"STATE_ID\", \"COLOR_ID\", \"WINS\", \"LOSSES\") VALUES('"
+	                        + name + "'," + to_string(state_id) + "," + to_string(color_id) + ","
 	                        + to_string(wins) + "," + to_string(losses) + ");");
 	w.commit();
 }
@@ -36,9 +36,9 @@ void add_team(connection *C, string name, int state_id, int color_id, int wins, 
 
 void add_state(connection *C, string name)
 {
-	int stateID = countNum(C, "STATE") + 1;
+  //	int stateID = countNum(C, "STATE") + 1;
 	pqxx::work w(*C);
-	pqxx::result r = w.exec("INSERT INTO \"STATE\" VALUES(" + to_string(stateID) + ",'"
+	pqxx::result r = w.exec("INSERT INTO \"STATE\" (\"NAME\") VALUES('"
 	                        + name + "');");
 	w.commit();
 }
@@ -46,9 +46,9 @@ void add_state(connection *C, string name)
 
 void add_color(connection *C, string name)
 {
-	int colorID = countNum(C, "COLOR") + 1;
+  //	int colorID = countNum(C, "COLOR") + 1;
 	pqxx::work w(*C);
-	pqxx::result r = w.exec("INSERT INTO \"COLOR\" VALUES(" + to_string(colorID) + ",'"
+	pqxx::result r = w.exec("INSERT INTO \"COLOR\" (\"NAME\") VALUES('"
 	                        + name + "');");
 	w.commit();
 }
