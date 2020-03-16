@@ -61,10 +61,11 @@ def reset_sequence(model):
 
 
 def main():
-    reset_sequence(STATE)
-    reset_sequence(COLOR)
-    reset_sequence(TEAM)
-    reset_sequence(PLAYER)
+    # reset_sequence(STATE)
+    # reset_sequence(COLOR)
+    # reset_sequence(TEAM)
+    # reset_sequence(PLAYER)
+
     # sequence_sql = connection.ops.sequence_reset_sql(no_style(), [STATE, COLOR, TEAM, PLAYER])
     # print("**************")
     # print(sequence_sql)
@@ -74,8 +75,8 @@ def main():
     #         cursor.execute(sql)
     create_color()
     create_state()
-    # create_team()
-    # create_player()
+    create_team()
+    create_player()
 
 
 if __name__ == '__main__':

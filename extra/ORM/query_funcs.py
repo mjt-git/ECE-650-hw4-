@@ -58,10 +58,19 @@ def query3(team_name):
     for ply in res:
         print(ply.FIRST_NAME + ' ' + ply.LAST_NAME)
 
+def query4(team_state, team_color):
+    print('FIRST_NAME LAST_NAME UNIFORM_NUM')
+    res = PLAYER.objects.all();
+    res = res.filter(TEAM_ID__STATE_ID__NAME=team_state, TEAM_ID__COLOR_ID__NAME=team_color)
+    for ply in res:
+        print(ply.FIRST_NAME + ' ' + ply.LAST_NAME + ' ' + str(ply.UNIFORM_NUM))
 
-
-
-
+def query5(num_wins):
+    print('FIRST_NAME LAST_NAME NAME WINS')
+    res = PLAYER.objects.all()
+    res = res.filter(TEAM_ID__WINS__gt=num_wins)
+    for ply in res:
+        print(ply.FIRST_NAME + ' ' + ply.LAST_NAME + ' ' + ply.TEAM_ID.NAME + ' ' + str(ply.TEAM_ID.WINS))
 
 query1(1, 35, 40,
     0, 10, 20,
@@ -69,7 +78,14 @@ query1(1, 35, 40,
     0, 1, 10,
     0, 0.3, 1,
     0, 0.2, 1)
-
+print('*************************************************************')
 query2("Maroon")
+print('*************************************************************')
 
 query3("Duke")
+print('*************************************************************')
+
+query4("NC", "DarkBlue")
+print('*************************************************************')
+
+query5(10)
