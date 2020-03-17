@@ -71,7 +71,7 @@ def query5(num_wins):
     res = res.filter(TEAM_ID__WINS__gt=num_wins)
     for ply in res:
         print(ply.FIRST_NAME + ' ' + ply.LAST_NAME + ' ' + ply.TEAM_ID.NAME + ' ' + str(ply.TEAM_ID.WINS))
-
+"""
 query1(1, 35, 40,
     0, 10, 20,
     0, 1, 5,
@@ -89,3 +89,26 @@ query4("NC", "DarkBlue")
 print('*************************************************************')
 
 query5(10)
+"""
+
+query1(1, 35, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+query1(1, 35, 40, 0, 18, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+query1(1, 35, 40, 1, 18, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+query1(0, 35, 40, 0, 18, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+query2("DarkBlue")
+query3("UNC")
+query3("Duke")
+query4("NC", "LightBlue")
+query4("NC", "DarkBlue")
+query5(13)
+add_player(1, 1, "cjw", "mjt", 1, 1, 1, 1, 1, 1)
+query1(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+query2("nb")
+query3("666")
+query4("NC", "Red")
+query5(5)
+add_player(1, 60, "66666", "88888", 20, 20, 10, 10, 5.3, 5.3)
+add_team("JOKER", 10, 3, 20, 0)
+add_state("N/A")
+add_color("wierd")
+query1(1, 10, 30, 0, 0, 40, 0, 0, 6, 0, 0, 5, 0, 0.0, 10.0, 0, 0.0, 10.0)
